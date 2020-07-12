@@ -16,7 +16,7 @@
       <button type="button" (click) = "all()" (click)="myModal.show()">Donate Goods</button>
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click) = "a()" dropdownToggle (click)="false"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">{{numbernotif.number}}</span></a>
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click) = "a()" dropdownToggle (click)="false"><i class="icon-bell"></i><span *ngIf = "numbernotif" class="badge badge-pill badge-danger">{{numbernotif.number}}</span></a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>Notifications</strong></div>
         <a *ngFor = "let notif of notiflist" class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> {{notif.description}}</a>

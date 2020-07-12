@@ -55,6 +55,7 @@ export class PreregistrationComponent implements OnInit {
       } 
 
       this.testService.addnotif(data) ; 
+      this.testService.numberofnotif(p.userid)
 
     }
   

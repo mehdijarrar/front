@@ -15,5 +15,11 @@ export const navItems: INavData[] = [
     url: '/subscriber/agenda',
     icon: 'icon-speedometer',
     
+  },
+  {
+    name: 'chatroom',
+    url: '/subscriber/chatroom',
+    icon: 'icon-speedometer',
+    
   }
 ];

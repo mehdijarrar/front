@@ -4,6 +4,7 @@ import { AuthService } from './../../shared/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DlayoutService } from './default-layout.service' ; 
 import {ModalDirective} from 'ngx-bootstrap/modal';
+import { MessagingService } from './../../service/messaging.service' ; 
 import {Goods} from './../../shared/models/goods'
 import { Disnotif } from './../../shared/models/disnotif' ;
 import { Numbernotif } from './../../shared/models/numbernotif' ;
@@ -14,13 +15,15 @@ import { Numbernotif } from './../../shared/models/numbernotif' ;
 export class DLayoutComponent implements OnInit {
   @ViewChild('myModal') public myModal: ModalDirective;
   good : Goods ;
-  userid: number ; 
+  public id : Number ;
+  userid: Number ; 
   notiflist : Disnotif[]=[] ; 
   numbernotif : Numbernotif ; 
    i : number = 0 ; 
+  
   public sidebarMinimized = false;
   public navItems = navItems;
-  constructor(public authService: AuthService , public dlayoutService: DlayoutService ) { }
+  constructor(public authService: AuthService , public dlayoutService: DlayoutService ,  public messagingService : MessagingService ) { }
   message;
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -28,8 +31,8 @@ export class DLayoutComponent implements OnInit {
 
   a(){
 
-
-    this.dlayoutService.updatenumber() ; 
+    this.userid = Number(localStorage.getItem('userid'));
+    this.dlayoutService.updatenumber(this.userid) ; 
     
   }
   donate(){
@@ -49,7 +52,14 @@ export class DLayoutComponent implements OnInit {
     this.authService.doLogout()
   }
   ngOnInit() {
-    this.userid = Number(localStorage.getItem('userid')); 
+
+    this.id = Number(localStorage.getItem('userid')); 
+    this.messagingService.requestPermission(this.id) ;  
+    this.messagingService.receiveMessage()
+    this.message = this.messagingService.currentMessage
+
+    this.userid = Number(localStorage.getItem('userid'));
+
     this.dlayoutService.displaynotif(this.userid).snapshotChanges().subscribe((res : any) => {
       this.i=0 ; 
       this.notiflist =[] ; 
@@ -61,7 +71,7 @@ export class DLayoutComponent implements OnInit {
    })
 
     } ) ;
-    this.dlayoutService.numbernotif().snapshotChanges().subscribe((res : any) => {
+    this.dlayoutService.numbernotif(this.userid).snapshotChanges().subscribe((res : any) => {
        
      this.numbernotif = null ; 
       res.map( a => {  

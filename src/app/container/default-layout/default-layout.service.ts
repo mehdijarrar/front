@@ -24,9 +24,9 @@ export class DlayoutService {
       private firestore: AngularFirestore 
     ) {
     }
-updatenumber(){
+updatenumber(id:Number){
 
-  this.firestore.collection("numbernotif").ref.where("userid", "==", 11)
+  this.firestore.collection("numbernotif").ref.where("userid", "==", id)
   .get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
@@ -45,7 +45,7 @@ updatenumber(){
   }
 
   
-  displaynotif(userid : number){
+  displaynotif(userid : Number){
       
   
   return  this.firestore.collection("notif"  ,  
@@ -58,13 +58,13 @@ updatenumber(){
   }
 
 
-  numbernotif(){
+  numbernotif(id : Number){
       
   
     return  this.firestore.collection("numbernotif"  ,  
       ref => {
         let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-        { query = query.where('userid', '==', 11) };
+        { query = query.where('userid', '==', id) };
         
         return query;
     })

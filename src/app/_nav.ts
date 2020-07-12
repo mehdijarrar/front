@@ -57,7 +57,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Chat room',
-    url: '/admin/pre-registartion',
+    url: '/admin/chatroom',
     icon: 'icon-cursor',
     
   },

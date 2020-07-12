@@ -5,15 +5,17 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Numbernotif } from './../../shared/models/numbernotif' ;
 
 import { notif } from '../../shared/models/notif' ;
+import { firestore } from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
 
 export class testService {
  
-  
+  numbernotif : Numbernotif ; 
   
     key = 'AAAAVgzO1YU:APA91bGrvL2yrG5of_MXymxNbRUowFZIa-dgGn8q2hOqr9CgOgMZUBjjQeP6Dg2pHD-7lkUVjJm255DgWLWyyCZ-M010za8LYZIlmoLr7m8fAUvBE3RYDMEzCARSEiCdbOXFZJp7HG9M' ; 
     endpoint: string = 'https://fcm.googleapis.com/fcm/send';
@@ -53,14 +55,33 @@ export class testService {
   }
 
   addnotif(data){
+
+
+    
     return new Promise<any>((resolve, reject) =>{
       this.firestore
           .collection("notif")
           .add(data)
           .then(res => {}, err => reject(err));
-  });
+  });  
   }
 
+  numberofnotif(id:Number){
+
+   
+    this.firestore.collection("numbernotif").ref.where("userid", "==", id)
+    .get()
+    .then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        doc.ref.update({number: firestore.FieldValue.increment(1) });
+        
+    });
+})
+    
+
+  }
+
+  
   
   // Error 
   handleError(error: HttpErrorResponse) {

@@ -58,6 +58,12 @@ export const routes: Routes = [
         
         {path: 'event/:id',component : EventComponent ,loadChildren: () => import('./views/event/event.module').then(m => m.EventModule)},
         {path: 'agenda', component: AgendaComponent},
+        
+      
+        {
+        path: 'chatroom',
+        loadChildren: () => import('./views/chatroom/chatroom.module').then(m => m.ChatroomModule)
+        }
     ]
 
   },
@@ -138,9 +144,12 @@ export const routes: Routes = [
       {
         path: 'pre-registartion',
         loadChildren: () => import('./views/preregistration/preregistration.module').then(m => m.PreregistrationModule)
+      } ,
+      
+      {
+        path: 'chatroom',
+        loadChildren: () => import('./views/chatroom/chatroom.module').then(m => m.ChatroomModule)
       }
-      
-      
      
     ]
   },
