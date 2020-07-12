@@ -1,0 +1,87 @@
+<form [formGroup]="serviceForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+    <div class="form-group row">
+    
+      <label class="col-md-2 col-form-label" for="volunteers">Add Service</label>
+    <div class="col-md-7">
+      <input type="text"  formControlName="description" class="form-control" placeholder="Add Service" >
+    </div>
+    <div class="col-md-2">
+      <button  type="button" (click)="Add()" class="btn btn-sm btn-primary"> ADD </button>
+    </div>
+    </div>
+    
+    </form>
+    
+    <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> List of goods
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Modify/Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+    
+              <tr *ngFor = "let service of servicelist" >
+                <td>{{service.description}}</td>
+                
+                <td>
+                  <button type="button"  data-toggle="modal" (click)="modifypop(service)" (click)="myModal.show()"> Modify </button>
+                  <button type="button" (click)="deleteservice(service.id)" > Delete </button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Modal title</h4>
+              <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div *ngIf="mservice" class="modal-body">
+              
+              <form [formGroup]="modifyForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                <div class="form-group row">
+                
+                  <label class="col-md-3 col-form-label" for="volunteers">Modify Service</label>
+                <div class="col-md-7">
+                  <input type="text"  formControlName="modifydescription" class="form-control" [value] = "mservice.description" >
+                </div>
+            
+                </div>
+                
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
+              <button type="button" class="btn btn-primary" (click)="saveupdate()">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->

@@ -1,0 +1,148 @@
+
+ <div class="card">
+    <div class="card-header">
+      <strong>Create Event</strong> 
+    </div>
+    <div class="card-body">
+      <form [formGroup]="createEventForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="text-input">Event's Title</label>
+          <div class="col-md-9">
+            <input type="text" id="text-input"  formControlName="title" class="form-control" placeholder="Title"> 
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="text-input">Description</label>
+          <div class="col-md-9">
+            <ckeditor  formControlName="description" [editor]="Editor"></ckeditor>
+          </div>
+        </div>
+
+        
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Event's place</label>
+          <div class="col-md-9">
+            <input type="text" id="place" formControlName="place" class="form-control" placeholder="place" >
+            
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="date-input">Event's Date</label>
+          <div class="col-md-9">
+            <input class="form-control" id="date-input" type="date" formControlName="date"placeholder="date">
+            
+          </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="volunteers">Number of Volunteers Needed</label>
+            <div class="col-md-9">
+                <input type="number" id="volunteers" formControlName="volunteers_needed" class="form-control" placeholder="volunteers" >
+                
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="volunteers">Money Needed</label>
+            <div class="col-md-9">
+                <input type="number" formControlName="money_needed" class="form-control" placeholder="money" >
+                
+        </div>
+        </div>
+        
+        
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="select1">Select Services</label>
+          <div class="col-md-5">
+            <select id="select1" formControlName="select1" class="form-control">
+              <option [ngValue]="0" >Please select </option>
+              <option *ngFor = "let sl of slist"  [ngValue]="sl"> {{ sl.description }} </option>
+            </select>
+            
+
+            </div>
+            <div class="col-md-2">
+                <input type="number"  formControlName="amount_service" class="form-control" placeholder="number" >
+            </div>
+            <div class="col-md-2">
+                <button  type="button" (click)="add_service()" class="btn btn-sm btn-primary"> ADD </button>
+            </div>
+           
+             
+                    <table class="table" *ngIf="service.length > 0 " >
+                        <thead>
+                          <tr  >
+                            
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Amount</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let s of sselected" >
+                            
+                            <td>{{s.description}}</td>
+                            <td>{{s.amount}}</td>
+                            
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="select2">Select Goods</label>
+            <div class="col-md-5">
+              <select id="select2" formControlName="select2"  class="form-control">
+                <option [ngValue]="0" >Please select </option>
+                <option *ngFor = "let gl of glist" [ngValue]="gl" > {{gl.description}} </option>
+                
+              </select>
+              
+  
+              </div>
+              <div class="col-md-2">
+                  <input type="number" formControlName="amount_goods" class="form-control" placeholder="number" >
+              </div>
+              <div class="col-md-2">
+                  <button type="button" (click)="add_goods()" class="btn btn-sm btn-primary"> ADD </button>
+              </div>
+
+              <table class="table"  *ngIf="goods.length > 0 " >
+                <thead>
+                  <tr  >
+                    
+                    <th scope="col">Goods Name</th>
+                    <th scope="col">Amount</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = "let g of gselected" >
+                    
+                    <td>{{g.description}}</td>
+                    <td>{{g.amount}}</td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+              
+          </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="file-input">Photo</label>
+          <div class="col-md-9">
+            <input type="file" (change)="onFileChanged($event)">
+          </div>
+        </div>
+        
+      </form>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-sm btn-primary" (click)="create()"   ><i class="fa fa-dot-circle-o"></i> Submit</button>
+      <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+    </div>
+  </div>
+

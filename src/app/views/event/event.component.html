@@ -1,0 +1,262 @@
+<div *ngIf="!this.AuthService.isLoggedIn" class="animated fadeIn">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="#">Association</a>
+              <button aria-controls="navbarSupportedContent" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+  
+              <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true">
+                
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success mr-xl-5 " type="submit">Search</button>
+                </form>
+                <ul class="nav navbar-nav ml-auto">
+                    <li>
+                        <button class="btn btn-block btn-outline-primary" >Donate</button>
+                    </li>
+                    <li>
+                        <button class="btn btn-block btn-outline-primary" routerLink="/register">SignUp</button>
+                    </li>
+                    <li>
+                        <button class="btn btn-block btn-outline-primary" routerLink="/log-in" >SignIn</button>
+                    </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section" *ngIf="event" >
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <!-- Post content -->
+        <div class="col-md-8">
+          <div class="section-row sticky-container">
+            <div class="main-post">
+
+              <figure class="figure-img">
+                <img class="img-responsive" src="{{event.event.url}}" alt="">
+              </figure>
+
+              <h3>{{event.event.title}}</h3>
+              <div innerHTML="{{event.event.description}}"></div>
+            </div>
+            
+          </div>  
+        </div>
+        <!-- /aside -->
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /container -->
+  </div>
+
+
+
+
+  <ul *ngIf="this.AuthService.isLoggedIn" class="nav navbar-nav ml-auto">
+    <li>
+        <button class="btn btn-block btn-outline-primary" data-toggle="modal" (click)="Dgoods.show()"  (click)="donategoods()">Donate Goods</button>
+    </li>
+    <li>
+        <button class="btn btn-block btn-outline-primary" data-toggle="modal" (click)="Dservice.show()"(click)="donateservice()">Give Service</button>
+    </li>
+    <li>
+        <button class="btn btn-block btn-outline-primary" data-toggle="modal" (click)="Dmoney.show()" >Donate Money</button>
+    </li>
+    <li>
+      <button class="btn btn-block btn-outline-primary"(click)="participate()">Participate</button>
+  </li>
+  </ul>
+
+
+
+
+  <div bsModal *ngIf="event" #Dgoods="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Donate Goods</h4>
+          <button type="button" class="close" (click)="Dgoods.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="goodsForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <label class="col-md-6 col-form-label" for="select1">Select Goods</label> 
+          <label class="col-md-4 col-form-label" for="select1">Number</label>
+          <div class="form-group row">
+            
+            <div class="col-md-6">
+              <select id="select1" name="select1" class="form-control" formControlName="select1" >
+                <option  value="0">Please select</option>
+                <option *ngFor = "let g of ngoods" [value]="g.id">{{g.description}}</option>
+            
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="number"  formControlName="numberg" id="text-input" class="form-control" placeholder="Number" > 
+            </div>
+
+
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  (click)="Dgoods.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="goodsprovided()" >Donate</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+
+  <div bsModal #Dservice="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="Dservice.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="serviceForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <label class="col-md-6 col-form-label" for="select1">Select Service</label> 
+            <label class="col-md-4 col-form-label" for="select1">Number</label>
+            <div class="form-group row">
+              
+              <div class="col-md-6">
+                <select id="select1" name="select1" class="form-control" formControlName="select1" >
+                  <option  value="0">Please select</option>
+                  <option *ngFor = "let s of nservice" [value]="s.id">{{s.description}}</option>
+              
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input type="number"  formControlName="numbers" id="text-input" class="form-control" placeholder="Number" > 
+              </div>
+  
+  
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="Dservice.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="serviceprovided()">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  
+  <div bsModal #Dmoney="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="Dmoney.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="moneyForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="name">Amount</label>
+                      <input type="number" class="form-control" formControlName="amount" placeholder="Amount">
+                    </div>
+                  </div>
+                </div><!--/.row-->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" placeholder="Enter your name">
+                    </div>
+                  </div>
+                </div><!--/.row-->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="ccnumber">Credit Card Number</label>
+                      <input type="text" class="form-control"  placeholder="0000 0000 0000 0000">
+                    </div>
+                  </div>
+                </div><!--/.row-->
+                <div class="row">
+                  <div class="form-group col-sm-4">
+                    <label for="ccmonth">Month</label>
+                    <select class="form-control" >
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-sm-4">
+                    <label for="ccyear">Year</label>
+                    <select class="form-control" >
+                      <option>2014</option>
+                      <option>2015</option>
+                      <option>2016</option>
+                      <option>2017</option>
+                      <option>2018</option>
+                      <option>2019</option>
+                      <option>2020</option>
+                      <option>2021</option>
+                      <option>2022</option>
+                      <option>2023</option>
+                      <option>2024</option>
+                      <option>2025</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="cvv">CVV/CVC</label>
+                      <input type="text" class="form-control"  placeholder="123">
+                    </div>
+                  </div>
+                </div><!--/.row-->
+              </div>
+            </div>
+          </div><!--/.col-->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="Dmoney.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="money()">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+

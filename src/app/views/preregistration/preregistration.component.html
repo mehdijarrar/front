@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Simple Table
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Event's Title</th>
+            <th>Reminder/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let p of prelist">
+            <td>{{p.firstname}} {{p.lastname}}</td>
+            <td>{{p.email}}</td>
+            <td>{{p.event_title}}</td>
+            <td>
+              <button type="button" (click)="reminder(p)" >Reminder</button><button type="button"(click)="deletepre(p.id)">Delete</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>

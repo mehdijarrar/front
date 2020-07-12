@@ -1,0 +1,217 @@
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> List of events
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> Event's Title </th>
+            <th> Volunteers Needed </th>
+            <th> Money Needed </th>
+            <th> Services Needed </th>
+            <th> Goods Needed </th>
+            <th> Modify/Delete </th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor = "let e of eventslist" >
+            <td>{{e.title}}</td>
+            
+            <td>{{e.volunteers_needed}} ({{e.volunteers_provided}})  </td>
+            <td>{{e.money_needed}} ({{e.money_provided}})</td>
+            <td>{{e.service_needed}} ({{e.service_provided}})</td>
+            <td>{{e.goods_needed}} ({{e.goods_provided}})</td>
+            <td>
+              <button type="button"  data-toggle="modal" (click) = "modifyevent(e.id)" (click)="largeModal.show()" > Modify </button>
+              <button type="button" (click)="deleteevent(e.id)" > Delete </button>
+            </td>
+
+          </tr>
+          
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  
+  
+  <div    bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div  *ngIf= "event" class="modal-body">
+          
+          <form [formGroup]="createEventForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="text-input">Event's Title</label>
+              <div class="col-md-9">
+                <input type="text" id="text-input"  formControlName="title" [value] = "CreateEvent.event.title" class="form-control" > 
+              </div>
+            </div>
+              <div class="form-group row">
+               
+                <label class="col-md-3 col-form-label" for="text-input">Description</label>
+                <div class="col-md-9">
+                  <ckeditor  [editor]="Editor"  [data]="editorData" (change)="onChange($event)"></ckeditor>
+
+                </div>
+              </div>
+      
+
+            
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" >Event's place</label>
+              <div class="col-md-9">
+                <input type="text" id="place" formControlName="place"  [value] = "CreateEvent.event.place" class="form-control"   >
+                
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="date-input">Event's Date</label>
+              <div class="col-md-9">
+                <input class="form-control" id="date-input" type="date" [value] = "CreateEvent.event.date" formControlName="date"placeholder="date">
+                
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="volunteers" >Number of Volunteers Needed</label>
+                <div class="col-md-9">
+                    <input type="number" id="volunteers" formControlName="volunteers_needed" class="form-control" [value] = "CreateEvent.event.volunteers_needed"  >
+                    
+                </div>
+            </div>
+    
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="volunteers">Money Needed</label>
+                <div class="col-md-9">
+                    <input type="number" formControlName="money_needed" class="form-control" [value] = "CreateEvent.event.money_needed"  >
+                    
+            </div>
+            </div>
+            
+            
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Select Services</label>
+              <div class="col-md-5">
+                <select id="select1" formControlName="select1" class="form-control">
+                  <option value="0">Please select </option>
+                  <option *ngFor = "let sl of slist"  [ngValue]="sl"> {{ sl.description }} </option>
+                </select>
+                
+    
+                </div>
+                <div class="col-md-2">
+                    <input type="number"  formControlName="amount_service" class="form-control" placeholder="number" >
+                </div>
+                <div class="col-md-2">
+                    <button  type="button" (click)="add_service()" class="btn btn-sm btn-primary"> ADD </button>
+                </div>
+               
+                 
+                        <table class="table" *ngIf="service.length > 0 " >
+                            <thead>
+                              <tr  >
+                                
+                                <th scope="col">Service Name</th>
+                                <th scope="col">Amount</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor = "let s of sselected" >
+                                
+                                <td>{{s.description}}</td>
+                                <td>{{s.amount}}</td>
+                                <td> <button type="button" (click)="delete_service(s)">delete</button> </td>
+                              </tr>
+                              
+                            </tbody>
+                          </table>
+            </div>
+    
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select2">Select Goods</label>
+                <div class="col-md-5">
+                  <select id="select2" formControlName="select2"  class="form-control">
+                    
+                    <option *ngFor = "let gl of glist" [ngValue]="gl" > {{gl.description}} </option>
+                    
+                  </select>
+                  
+      
+                  </div>
+                  <div class="col-md-2">
+                      <input type="number" formControlName="amount_goods" class="form-control" placeholder="number" >
+                  </div>
+                  <div class="col-md-2">
+                      <button type="button" (click)="add_goods()" class="btn btn-sm btn-primary"> ADD </button>
+                  </div>
+    
+                  <table class="table"  *ngIf="goods.length > 0 " >
+                    <thead>
+                      <tr  >
+                        
+                        <th scope="col">Goods Name</th>
+                        <th scope="col">Amount</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let g of gselected" >
+                        
+                        <td>{{g.description}}</td>
+                        <td>{{g.amount}}</td>
+                        <td> <button type="button" (click)="delete_goods(g)">delete</button> </td>
+                        
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  
+              </div>
+    
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="file-input">Photo</label>
+              <div class="col-md-9">
+                <input type="file" id="file-input" name="file-input">
+              </div>
+            </div>
+            
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click) = "saveupdate()" >Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+  

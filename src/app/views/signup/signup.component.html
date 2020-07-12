@@ -1,0 +1,47 @@
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="card-body p-4">
+                <form [formGroup]="signupForm" (ngSubmit)="registerUser()"> 
+                  <h1>Register</h1>
+                  <p class="text-muted">Create your account</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="firstname"  placeholder="First name"  required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="lastname"  placeholder="last name"  required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="email" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Password"autocomplete="new-password" required>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" required>
+                  </div>
+                  <button type="submit" class="btn btn-block btn-success">Create Account</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  

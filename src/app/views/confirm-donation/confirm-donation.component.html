@@ -1,0 +1,86 @@
+<div class="card" x>
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Simple Table
+    </div>
+    <div class="card-body">
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Number</th>
+            <th>Donor email</th>
+            <th>Event title</th>
+            <th>Confirm / Delete </th>
+          </tr>
+        </thead>
+        <tbody  >
+          <tr  *ngFor = "let s of service" >
+            <td>{{s.name}}</td>
+            <td>{{s.amount}}</td>
+            <td>{{s.donor_email}}</td>
+            <td>{{s.event_title}}</td>
+            <td>
+              <button type="button" (click) = "confirmservice(s.id)">Confirm</button>
+              <button type="button" (click) = "deleteservice(s.id)" >Delete</button>
+            </td>
+          </tr>
+      
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="card" x>
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Simple Table
+    </div>
+    <div class="card-body">
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Goods</th>
+            <th>Number</th>
+            <th>Donor email</th>
+            <th>Event title</th>
+            <th>Confirm / Delete </th>
+          </tr>
+        </thead>
+        <tbody  >
+          <tr  *ngFor = "let g of goods" >
+            <td>{{g.name}}</td>
+            <td>{{g.amount}}</td>
+            <td>{{g.donor_email}}</td>
+            <td>{{g.event_title}}</td>
+            <td>
+              <button type="button" (click) = "confirm(g.id)">Confirm</button>
+              <button>Delete</button>
+            </td>
+          </tr>
+      
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+
+
