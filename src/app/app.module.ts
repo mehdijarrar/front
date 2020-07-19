@@ -25,13 +25,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultLayoutComponent } from './containers';
+import { AdminLayoutComponent } from './containers';
 import { DLayoutComponent } from './container';
 import { MemberLayoutComponent } from './member';
 
 
 const APP_CONTAINERS = [
-  DefaultLayoutComponent,
+  AdminLayoutComponent,
   DLayoutComponent,
   MemberLayoutComponent
 

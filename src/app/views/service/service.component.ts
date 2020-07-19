@@ -17,12 +17,38 @@ export class ServiceComponent implements OnInit {
   constructor(public ServiceService : ServiceService,
     public router: Router ) { }
 
+    startIndex = 0 ; 
+    endIndex = 5; 
+    pageindex = 1 ;
+
 
   servicelist : Service[]=[] ; 
   public service : Service ;
   serviceForm : FormGroup;
   modifyForm : FormGroup ; 
    public mservice : Service ; 
+
+
+
+   updateindex(pageindex){
+    this.pageindex = pageindex ; 
+    this.startIndex = (pageindex-1)*5; 
+    this.endIndex = this.startIndex + 5 ; 
+    if(this.endIndex > this.servicelist.length){
+      this.endIndex = this.servicelist.length ;
+    }
+  }
+  
+  getArrayFromNumber(length){
+    if(length/5 > Math.floor(length/5) ) {
+      return new Array(Math.floor(length/5) + 1 )
+    }
+    else{
+      return new Array(Math.floor(length/5))
+    }
+  }
+
+
 
     modifypop(a){
       this.mservice = a ; 
@@ -40,6 +66,10 @@ export class ServiceComponent implements OnInit {
     }
 
   Add(){
+
+    if((this.endIndex === this.servicelist.length) && ((this.endIndex - this.startIndex) < 5)  ) {
+      this.endIndex = this.endIndex + 1 ;
+     } 
     this.service = new Service ;    
     this.service.description = this.serviceForm.value.description ; 
     this.service.id = null ;

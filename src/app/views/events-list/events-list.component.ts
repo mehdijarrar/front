@@ -42,6 +42,12 @@ export class EventsListComponent implements OnInit   {
   description : String ; 
 
 
+
+  startIndex = 0 ; 
+  endIndex = 5; 
+  pageindex = 1 ;
+
+
 constructor(public EventListService : EventListService,
     public router: Router  ) { }
 
@@ -53,6 +59,24 @@ constructor(public EventListService : EventListService,
       this.description=data ; 
   }
    
+
+  updateindex(pageindex){
+    this.pageindex = pageindex ; 
+    this.startIndex = (pageindex-1)*5; 
+    this.endIndex = this.startIndex + 5 ; 
+    if(this.endIndex > this.eventslist.length){
+      this.endIndex = this.eventslist.length ;
+    }
+  }
+  
+  getArrayFromNumber(length){
+    if(length/5 > Math.floor(length/5) ) {
+      return new Array(Math.floor(length/5) + 1 )
+    }
+    else{
+      return new Array(Math.floor(length/5))
+    }
+  }
 
     ngOnInit() {
 

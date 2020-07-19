@@ -14,11 +14,34 @@ export class GoodsComponent implements OnInit {
   constructor(public GoodsService : GoodsService,
     public router: Router ) { }
     
+    startIndex = 0 ; 
+    endIndex = 5; 
+    pageindex = 1 ; 
+
   goodslist : Goods[]=[] ; 
   public goods: Goods ;
   goodsForm : FormGroup;
   modifyForm : FormGroup ; 
   public mgoods : Goods ; 
+
+updateindex(pageindex){
+  this.pageindex = pageindex ; 
+  this.startIndex = (pageindex-1)*5; 
+  this.endIndex = this.startIndex + 5 ; 
+  if(this.endIndex > this.goodslist.length){
+    this.endIndex = this.goodslist.length ;
+  }
+}
+
+getArrayFromNumber(length){
+  if(length/5 > Math.floor(length/5) ) {
+    return new Array(Math.floor(length/5) + 1 )
+  }
+  else{
+    return new Array(Math.floor(length/5))
+  }
+}
+
   modifypop(a){
     this.mgoods = a ; 
     console.log(this.mgoods) ; 
@@ -37,6 +60,9 @@ export class GoodsComponent implements OnInit {
 
 
   Add(){
+   if((this.endIndex === this.goodslist.length) && ((this.endIndex - this.startIndex) < 5)  ) {
+    this.endIndex = this.endIndex + 1 ;
+   } 
     this.goods = new Goods ;    
     this.goods.description = this.goodsForm.value.description ; 
     this.goods.id = null ;

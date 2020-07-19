@@ -18,6 +18,10 @@ import {UsersService} from './users.service' ;
 })
 export class UsersComponent implements OnInit  {
   userslist=[] ;
+  startIndex = 0 ; 
+  endIndex = 5; 
+  pageindex = 1 ;
+
   constructor(public router: Router , public UsersService : UsersService ) { }
 
   deleteuser(a:number){
@@ -28,6 +32,24 @@ export class UsersComponent implements OnInit  {
 
     }
     this.UsersService.Removeuser(a) ; 
+  }
+
+  updateindex(pageindex){
+    this.pageindex = pageindex ; 
+    this.startIndex = (pageindex-1)*5; 
+    this.endIndex = this.startIndex + 5 ; 
+    if(this.endIndex > this.userslist.length){
+      this.endIndex = this.userslist.length ;
+    }
+  }
+  
+  getArrayFromNumber(length){
+    if(length/5 > Math.floor(length/5) ) {
+      return new Array(Math.floor(length/5) + 1 )
+    }
+    else{
+      return new Array(Math.floor(length/5))
+    }
   }
 
   ngOnInit() {

@@ -16,9 +16,55 @@ export class ConfirmDonationComponent implements OnInit {
   unconfirmed_donation : Unconfirmed_donation ; 
   service : Unconfirmed_service[]=[] ; 
   goods : Unconfirmed_goods[]=[] ;
+
+  startIndex = 0 ; 
+  endIndex = 5; 
+  pageindex = 1 ;
+
+  startIndex2 = 0 ; 
+  endIndex2 = 5; 
+  pageindex2 = 1 ;
+
+
+
+
+
   constructor(public ConfirmService : ConfirmDonationService,
     public router: Router ) { }
 
+
+
+    updateindex(pageindex){
+      this.pageindex = pageindex ; 
+      this.startIndex = (pageindex-1)*5; 
+      this.endIndex = this.startIndex + 5 ; 
+      if(this.endIndex > this.service.length){
+        this.endIndex = this.service.length ;
+      }
+    }
+
+
+    updateindex2(pageindex){
+      this.pageindex2 = pageindex ; 
+      this.startIndex2 = (pageindex-1)*5; 
+      this.endIndex2 = this.startIndex2 + 5 ; 
+      if(this.endIndex2 > this.goods.length){
+        this.endIndex2 = this.goods.length ;
+      }
+    }
+    
+    getArrayFromNumber(length){
+      if(length/5 > Math.floor(length/5) ) {
+        return new Array(Math.floor(length/5) + 1 )
+      }
+      else{
+        return new Array(Math.floor(length/5))
+      }
+    }
+
+
+
+    
 deleteservice(a:number){
   this.ConfirmService.Removeservice(a) ;
   for(let i=0 ; i< this.service.length ; i++){

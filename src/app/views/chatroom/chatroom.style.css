@@ -1,213 +1,57 @@
-.full-width {
-  width: 80%;
-}
+/* CSS Document */
+body {
+  font:12px arial;
+  color: #222;
+  text-align:center;
+  padding:35px; }
 
-.main {
-  text-align: center;
-}
-
-.mat-card-header{
-  height:50px;
-  margin-bottom:1rem;
-}
-.mat-card-header > div{
-  position:relative;
-  width:100%;
-  height:100%;
-  background-color: rgb(16, 58, 143)  ;
+form, p, span {
   margin:0;
-  color:whitesmoke;
-  font-size:20px;
-  font-weight:bolder;
-  padding-top:1rem;
-  border-radius:10px
-}
-.mat-card-header-text {
-  margin: 0;
-}
-.mat-card-header > div > a{
-  text-decoration: none;
-}
-.mat-card-header > div > a >button{
-  position:absolute;
-  right:10px;
-}
+  padding:0; }
 
-.mat-card-content{
-  margin-top:2rem;
- }
+input { font:12px arial; }
 
-.mymessage {
-  display:block;
-  margin-top:10px;
-  background-color: #6384dd;
-  width:50%;
-  margin-left:45%;
-  box-shadow: 6px 6px 5px grey;
-  }
+a {
+  color:#0000FF;
+  text-decoration:none; }
 
-.othermessage {
-  display:block;
-  margin-top:10px;
-  background-color: rgb(96, 165, 192);
-  width:50%;
-  margin-left:2%;
-  box-shadow: 6px 6px 5px grey;
-}
-#userNameText > span{
-  font-size:70%;
-}
-#userNameText{
-  margin-right:75%; 
-  }
-  #userMessageText{
-    color:whitesmoke;
-  }
-.mat-card-content .mat-card{
-  position:relative;
-}  
+  a:hover { text-decoration:underline; }
 
-.mat-card-footer{
-    padding:4%;
-    display:flex;
-    flex-direction:row;
-    padding-left:5%;
-    }
-.mat-card-footer > button{
-  margin-left:20px;
-}
+#wrapper, #loginform {
+  margin:0 auto;
+  padding-bottom:25px;
+  background:#EBF4FB;
+  width:800px;
+  height: 400px;
+  border:1px solid #ACD8F0; }
 
-.deleteToExit{
-  position: absolute;
-  right:3%;
-  top:6%;
-  font-size:18px;
-  font-weight:bolder;
-}
-.deleteToExit:hover{
-  cursor: pointer;
-  font-weight:800;
-  font-size:17px;
-}
-.deleteDispear{
-  display:none;
-}
-.mat-card-footer{
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  grid-gap: 10px;
-  grid-template-areas:
-  "chooseFile progressBar progressBar" 
-  "textArea textArea buttonSend "
-}
-#file{
-  grid-area: chooseFile;
-}
-#progressBar{
-  grid-area: progressBar;
-}
-#textArea{
-  grid-area:textArea;
-}
-#buttonSend{
-  grid-area: buttonSend;
-}
+#loginform { padding-top:18px; }
 
-#messageImg{
-  width:auto;
-  height:200px;
-}
+  #loginform p { margin: 5px; }
 
-  
-@media screen and (max-width: 2100px){
-    #userNameText{
-      margin-right:65%; 
-      }
-}
+#chatbox {
+  text-align:left;
+  margin:0 auto;
+  margin-bottom:25px;
+  padding:10px;
+  background:#fff;
+  height:300px;
+  width:700px;
+  border:1px solid #ACD8F0;
+  overflow:auto; }
 
-@media screen and (max-width: 1475px){
-  #userNameText{
-    margin-right:46%; 
-    }
-}
+#usermsg {
+  width:500px;
+  border:1px solid #ACD8F0; }
 
-@media screen and (max-width: 1100px){
-  #userNameText{
-  margin-right:20%; 
-   }
-}
+#submit { width: 60px; }
 
-@media screen and (max-width: 850px){
-  .mymessage {
-    width:60%;
-    margin-left:30%;
-    }
-  
-  .othermessage {
-    width:60%;
-    margin-left:2%;
-   }
+.error { color: #ff0000; }
 
-   #messageImg{
-     height:150px;
-   }
-}
+#menu { padding:12.5px 25px 12.5px 25px; }
 
-@media screen and (max-width: 700px){
-  #userNameText{
-  margin-right:0%; 
-   }
-}
+.welcome { float:left; }
 
-@media screen and (max-width:540px){
-  .mat-card-header > div > a >button{
-    position: absolute;
-    right: 5px;
-    width: 17%;
-    height: 50%;
-    font-size: 11px;
-  }
+.logout { float:right; }
 
-  .mymessage {
-    width:70%;
-    margin-left:20%;
-    }
-  
-  .othermessage {
-    width:70%;
-    margin-left:2%;
-   }
-
-   #messageImg{
-     height:120px;
-   }
-}
-
-@media screen and (max-width:400px){
-  .mat-card-footer{
-    display:grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 2px;
-    grid-template-areas:
-    "chooseFile  chooseFile" 
-    "progressBar progressBar"
-    "textArea  buttonSend "
-  }
-  #textArea,#buttonSend,#chooseFile,#progressBar{
-    margin:0;
-  }
-  
-  .mymessage {
-    width:80%;
-    margin-left:10%;
-    }
-  
-  .othermessage {
-    width:80%;
-    margin-left:2%;
-   }
-
-   #messageImg{
-     height:80px;
-   }
-}
+.msgln { margin:0 0 2px 0; }

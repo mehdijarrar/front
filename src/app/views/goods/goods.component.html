@@ -27,7 +27,7 @@
         </thead>
         <tbody>
 
-          <tr *ngFor = "let good of goodslist" >
+          <tr *ngFor = "let good of goodslist | slice:startIndex:endIndex" >
             <td>{{good.description}}</td>
             
             <td>
@@ -39,14 +39,18 @@
         </tbody>
       </table>
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <div *ngFor="let i of getArrayFromNumber(goodslist.length) ; let in= index ">
+          <li *ngIf=" in + 1 === pageindex" class="page-item active">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li>
+          <li *ngIf="in + 1 !== pageindex" class="page-item">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li> 
+
+        </div>
+        
+        
+       
       </ul>
     </div>
   </div>

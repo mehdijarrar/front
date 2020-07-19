@@ -19,7 +19,7 @@
       <button type="button" (click) = "donate()">Donate Goods</button>
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click) = "a()" dropdownToggle (click)="false"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">{{numbernotif.number}}</span></a>
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click) = "a()" dropdownToggle (click)="false"><i class="icon-bell"></i><span class="badge badge-pill badge-danger" *ngIf = "numbernotif">{{numbernotif.number}}</span></a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>Notifications</strong></div>
         <a *ngFor = "let notif of notiflist" class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> {{notif.description}}</a>
@@ -96,7 +96,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Become a Subscriber</h4>
         <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -113,7 +113,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="name">Amount</label>
-                    <input type="number" class="form-control" id="name" placeholder="Enter your name">
+                    <input type="number" class="form-control" id="name" placeholder="Number">
                   </div>
                 </div>
               </div><!--/.row-->
@@ -183,7 +183,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="saveupdate()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="subscribe()">Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

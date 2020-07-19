@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
+import { AdminLayoutComponent } from './containers';
 import { DLayoutComponent } from './container';
 import { MemberLayoutComponent } from './member';
 import { EventComponent } from './views/event/event.component' ;  
@@ -93,7 +93,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard] ,
-    component: DefaultLayoutComponent,
+    component: AdminLayoutComponent,
     
     
     data: {

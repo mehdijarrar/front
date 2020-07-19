@@ -18,10 +18,14 @@ export class PreregistrationComponent implements OnInit {
  notif : notif ; 
  notification : notification ; 
   prelist : Preregistration[]=[] ; 
+  startIndex = 0 ; 
+  endIndex = 5; 
+  pageindex = 1 ;
 
   constructor(public PreregistrationService : PreregistrationService, public testService:testService ,
     public router: Router ) { }
-
+    
+  
 
 
     deletepre(a:number){
@@ -32,6 +36,24 @@ export class PreregistrationComponent implements OnInit {
       }
      } 
     }
+    updateindex(pageindex){
+      this.pageindex = pageindex ; 
+      this.startIndex = (pageindex-1)*5; 
+      this.endIndex = this.startIndex + 5 ; 
+      if(this.endIndex > this.prelist.length){
+        this.endIndex = this.prelist.length ;
+      }
+    }
+    
+    getArrayFromNumber(length){
+      if(length/5 > Math.floor(length/5) ) {
+        return new Array(Math.floor(length/5) + 1 )
+      }
+      else{
+        return new Array(Math.floor(length/5))
+      }
+    }
+
 
     reminder(p:Preregistration){
       for(let i=0 ; i< p.tokens.length ; i++){

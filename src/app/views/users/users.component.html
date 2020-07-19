@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = "let user of userslist" >
+          <tr *ngFor = "let user of userslist | slice:startIndex:endIndex" >
             <td>{{user.firstname}} {{user.lastname}}</td>
             <td>{{user.email}}</td>
             <td>{{user.role}}</td>
@@ -26,14 +26,17 @@
         </tbody>
       </table>
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <div *ngFor="let i of getArrayFromNumber(userslist.length) ; let in= index ">
+          <li *ngIf=" in + 1 === pageindex" class="page-item active">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li>
+          <li *ngIf="in + 1 !== pageindex" class="page-item">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li> 
+
+        </div>
+        
+
       </ul>
     </div>
   </div>

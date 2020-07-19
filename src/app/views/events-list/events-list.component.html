@@ -16,7 +16,7 @@
         </thead>
         <tbody>
 
-          <tr *ngFor = "let e of eventslist" >
+          <tr *ngFor = "let e of eventslist | slice:startIndex:endIndex" >
             <td>{{e.title}}</td>
             
             <td>{{e.volunteers_needed}} ({{e.volunteers_provided}})  </td>
@@ -33,14 +33,17 @@
         </tbody>
       </table>
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <div *ngFor="let i of getArrayFromNumber(eventslist.length) ; let in= index ">
+          <li *ngIf=" in + 1 === pageindex" class="page-item active">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li>
+          <li *ngIf="in + 1 !== pageindex" class="page-item">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li> 
+
+        </div>
+        
+
       </ul>
     </div>
   </div>

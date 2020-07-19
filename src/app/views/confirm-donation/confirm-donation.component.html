@@ -1,6 +1,6 @@
 <div class="card" x>
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Simple Table
+      <i class="fa fa-align-justify"></i> Service Donations Table
     </div>
     <div class="card-body">
       <table class="table" >
@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody  >
-          <tr  *ngFor = "let s of service" >
+          <tr  *ngFor = "let s of service | slice:startIndex:endIndex" >
             <td>{{s.name}}</td>
             <td>{{s.amount}}</td>
             <td>{{s.donor_email}}</td>
@@ -28,14 +28,17 @@
         </tbody>
       </table>
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <div *ngFor="let i of getArrayFromNumber(service.length) ; let in= index ">
+          <li *ngIf=" in + 1 === pageindex" class="page-item active">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li>
+          <li *ngIf="in + 1 !== pageindex" class="page-item">
+            <a class="page-link" (click) = "updateindex(in + 1 )"  >{{in + 1 }}</a>
+          </li> 
+
+        </div>
+        
+
       </ul>
     </div>
   </div>
@@ -43,7 +46,7 @@
 
   <div class="card" x>
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Simple Table
+      <i class="fa fa-align-justify"></i> Goods Donations Table
     </div>
     <div class="card-body">
       <table class="table" >
@@ -57,28 +60,31 @@
           </tr>
         </thead>
         <tbody  >
-          <tr  *ngFor = "let g of goods" >
+          <tr  *ngFor = "let g of goods | slice:startIndex2:endIndex2" >
             <td>{{g.name}}</td>
             <td>{{g.amount}}</td>
             <td>{{g.donor_email}}</td>
             <td>{{g.event_title}}</td>
             <td>
-              <button type="button" (click) = "confirm(g.id)">Confirm</button>
-              <button>Delete</button>
+              <button type="button" (click) = "confirmgoods(g.id)">Confirm</button>
+              <button type="button" (click) = "deletegoods(g.id)" >Delete</button>
             </td>
           </tr>
       
         </tbody>
       </table>
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <div *ngFor="let i of getArrayFromNumber(goods.length) ; let in= index ">
+          <li *ngIf=" in + 1 === pageindex" class="page-item active">
+            <a class="page-link" (click) = "updateindex2(in + 1 )"  >{{in + 1 }}</a>
+          </li>
+          <li *ngIf="in + 1 !== pageindex" class="page-item">
+            <a class="page-link" (click) = "updateindex2(in + 1 )"  >{{in + 1 }}</a>
+          </li> 
+
+        </div>
+        
+
       </ul>
     </div>
   </div>
